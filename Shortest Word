@@ -1,0 +1,9 @@
+function findShort(s){
+  function compare(a, b) {
+    return a - b;
+  }
+  let arrW = s.split(' ');
+  let arrL = arrW.map(item => item = item.length);
+  let result = arrL.sort(compare);
+  return result[0];
+}
