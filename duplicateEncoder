@@ -1,0 +1,15 @@
+function duplicateEncode(word){
+    let transformArray = [];
+    let testWord = word.toLowerCase();
+    for(let i = 0; i < word.length; i++) {
+      inner: for(let j = 0; j < word.length; j++) {
+        if(testWord[i] === testWord[j] && i != j) {
+          transformArray.push(')');
+          break inner;
+        } 
+      }
+      if(transformArray[i] !== ')') transformArray.push('(');
+    }
+    let transformString = transformArray.join('');
+    return transformString;
+}
