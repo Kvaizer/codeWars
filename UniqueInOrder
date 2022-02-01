@@ -1,0 +1,10 @@
+let uniqueInOrder = function(iterable){
+  let resultArray = [];
+  for(let i = 0; i < iterable.length; i++) {
+    if(i === 0) resultArray.push(iterable[0]) 
+    if(iterable[i] !== resultArray[resultArray.length - 1]) {
+      resultArray.push(iterable[i])
+    } else continue;
+  }
+  return resultArray;
+}
