@@ -1,0 +1,13 @@
+function order(words){
+  let arr = words.split(' ');
+  let arrRightOrder = [];
+  arr.forEach(element => {
+    for(let letter of element) {
+      if(+letter) {
+        arrRightOrder[+letter - 1] = element;
+      }
+    }
+  })
+  let result = arrRightOrder.join(' ');
+  return  result;
+}
