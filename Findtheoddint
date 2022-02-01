@@ -1,0 +1,22 @@
+function search (array) {
+  let comparer = 0;
+  for(let i = 0; i < array.length; i++) {
+    if(array[i] % 2 === 1 && array[i] > comparer) comparer = array[i];
+    else continue;
+  }
+  return comparer;
+}
+function findOdd(A) {
+  let sameCount = [];
+  let counter = 0;
+  for(let i = 0; i < A.length; i++) {
+    for(let j = 0; j < A.length; j++) {
+      if(A[i] === A[j]) {
+        counter++;
+      }
+    }
+    sameCount.push(counter);
+    counter = 0;
+  }
+  return A[sameCount.indexOf(search(sameCount))];
+}
