@@ -1,0 +1,65 @@
+function parseInt(string) {
+  let numbers = {
+    'zero' : 0,
+    'one' : 1,
+    'two' : 2,
+    'three': 3,
+    'four' : 4,
+    'five' : 5,
+    'six' : 6,
+    'seven': 7,
+    'eight' : 8,
+    'nine' : 9,
+    'ten' : 10,
+    'eleven' : 11,
+    'twelve' : 12,
+    'thirteen' : 13,
+    'fourteen': 14,
+    'fifteen' : 15,
+    'sixteen': 16,
+    'seventeen': 17,
+    'eighteen' : 18,
+    'nineteen': 19,
+    'twenty': 20,
+    'thirty': 30,
+    'forty': 40,
+    'fifty': 50,
+    'sixty': 60,
+    'seventy': 70,
+    'eighty': 80,
+    'ninety': 90,
+    'hundred' : 100,
+    'thousand' : 1e3,
+    'million' : 1e6,
+  }
+  let arrOfNumbers = [];
+  let indexes = [];
+  let arr = string.split(' ');
+        for(let i = 0; i < arr.length; i++) {
+            if(arr[i].indexOf('-') != -1) {
+                indexes.push(i);
+                arr[i] = arr[i].split('-');
+            }
+        }
+  for(let i = 0; i < arr.length; i++) {
+      if(typeof arr[i] === 'string') {
+        for(let prop in numbers) {
+          if(prop === arr[i]) arrOfNumbers.push(numbers[prop]);
+          else continue;
+        }
+      } else if(typeof arr[i] === 'object') {
+        for(let prop in numbers) {
+          if(arr[i][0] === prop) arrOfNumbers.push(numbers[prop]);
+          else if(arr[i][1] === prop) arrOfNumbers.push(numbers[prop]);
+          else continue;
+        }
+      }
+    } 
+  return arrOfNumbers.reduce((result, item, index, array) => {
+    if(item === 1e6) result *= item;
+     else if(item === 1000) result *= item;
+            else if(item == 100) result += item*array[index-1] - array[index-1];
+           else result += item;
+                return result;
+  });
+  }
