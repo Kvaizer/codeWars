@@ -1,0 +1,6 @@
+function narcissistic(value) {
+  let valueArray = value.toString().split('');
+  let valuePowResult = valueArray.map(element => element ** valueArray.length).reduce((sum, current) => sum + current, 0);
+  let result = valuePowResult === value ? true : false;
+  return result;
+}
