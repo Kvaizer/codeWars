@@ -1,0 +1,9 @@
+var isSquare = function(n){
+  if(n < 0) return false;
+  else{
+  let a = n ** (1/2);
+  let b = a.toString().split('');
+  let result = (!b.includes('.')) ? true : false;
+  return result;
+    }
+}
