@@ -1,0 +1,3 @@
+function squareSum(numbers){
+return numbers.reduce((previousValue, item) => previousValue += item ** 2, 0);
+}
