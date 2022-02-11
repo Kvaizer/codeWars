@@ -1,0 +1,9 @@
+function sumIntervals(intervals) {
+  let set = new Set();
+  intervals.map((item, index, array) => {
+    for(let i = item[0] + 1; i <= item[1]; i++) {
+      set.add(i);
+    }
+  })
+  return Array.from(set).length;
+};
