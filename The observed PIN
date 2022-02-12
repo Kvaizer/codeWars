@@ -1,0 +1,62 @@
+function getPINs(observed) {
+     let x = new Set();
+     let results = observed.split('').map(function(item) {
+    let arr = [];
+    if(item == 5) {
+        arr.push(+item);
+        arr.push(+item - 1);
+        arr.push(+item + 1);
+        arr.push(+item - 3);
+        arr.push(+item + 3);
+    } else if(item == 8) {
+        arr.push(+item);
+        arr.push(+item - 1);
+        arr.push(+item + 1);
+        arr.push(+item - 3);
+        arr.push(0);
+    } else if(item == 4) {
+        arr.push(+item);
+        arr.push(+item + 1);
+        arr.push(+item + 3);
+        arr.push(+item - 3);
+    } else if(item == 6) {
+        arr.push(+item);
+        arr.push(+item - 1);
+        arr.push(+item + 3);
+        arr.push(+item - 3);
+    } else if(item == 1) {
+        arr.push(+item);
+        arr.push(+item + 1);
+        arr.push(+item + 3);
+    } else if(item == 2) {
+        arr.push(+item);
+        arr.push(+item + 1);
+        arr.push(+item - 1);
+        arr.push(+item + 3);
+    } else if(item == 3) {
+        arr.push(+item);
+        arr.push(+item - 1);
+        arr.push(+item + 3);
+    } else if(item == 7) {
+        arr.push(+item);
+        arr.push(+item + 1);
+        arr.push(+item - 3);
+    } else if(item == 9) {
+        arr.push(+item);
+        arr.push(+item - 1);
+        arr.push(+item - 3);
+    } else {
+        arr.push(+item);
+        arr.push(8);
+    }
+    return arr;
+    });
+        for(let j = 0; j <= 2000; j++) {
+            let variant = [];
+            for(let i = 0; i < results.length; i++) {
+            variant.push(String(results[i][Math.floor(Math.random() * (results[i].length - 0)) + 0]));
+
+        }
+        x.add(variant.join(''))
+    }
+    return Array.from(x);
