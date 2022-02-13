@@ -1,0 +1,41 @@
+function formatDuration (seconds) {
+  let a = {
+    'year': 3600 * 24 * 365,
+    'day': 3600 * 24,
+    'hour': 3600,
+    'minute': 60,
+    'second': 1,
+  };
+  let arr = [];
+  if(seconds == 0) arr.push('now');
+  if(seconds >= a.year) {
+   if(seconds / a.year >= 2) arr.push(`${Math.floor(seconds / a.year)} years`);
+    else arr.push('1 year');
+    seconds = seconds % a.year;
+  }
+  if(seconds >= a.day) {
+   if(seconds / a.day >= 2) arr.push(`${Math.floor(seconds / a.day)} days`);
+    else arr.push('1 day');
+    seconds = seconds % a.day;
+  }
+  if(seconds >= a.hour) {
+   if(seconds / a.hour >= 2) arr.push(`${Math.floor(seconds / a.hour)} hours`);
+    else arr.push('1 hour');
+    seconds = seconds % a.hour;
+  }
+  if(seconds >= a.minute) {
+   if(seconds / a.minute >= 2) arr.push(`${Math.floor(seconds / a.minute)} minutes`);
+    else arr.push('1 minute');
+    seconds = seconds % a.minute;
+  }
+  if(seconds < a.minute && seconds > 0) {
+    if(seconds == 1) arr.push('1 second');
+    else arr.push(`${seconds} seconds`);
+  }
+  for(let i = 0; i < arr.length; i++) {
+    if(i == arr.length - 2 || arr.length == 1) continue;
+    else if(i == (arr.length - 1)) arr[arr.length - 1] = 'and ' + arr[arr.length - 1];
+    else arr[i] += ',';
+  }
+  return arr.join(' ');
+}
