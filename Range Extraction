@@ -1,0 +1,15 @@
+function solution(list) {
+  let arr = [];
+  outer: for(let i = 0; i < list.length; i++) {
+    if(list[i + 2] - list[i] != 2) arr.push(list[i])
+    else {
+        for(let j = i; j < list.length; j++) {
+        if(list[j] + 1 == [list[j + 1]]) continue;
+        else arr.push(String(list[i]) + '-' + String(list[j]));
+          i = j;
+        continue outer;
+      }
+    };
+  }
+  return arr.join(',');
+}
