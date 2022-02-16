@@ -1,0 +1,111 @@
+function mix(s1, s2) {
+  let alphabet = {
+    a: 0,
+    b: 0,
+    c: 0,
+    d: 0,
+    e: 0,
+    f: 0,
+    g: 0,
+    h: 0,
+    i: 0,
+    j: 0,
+    k: 0,
+    l: 0,
+    m: 0,
+    n: 0,
+    o: 0,
+    p: 0,
+    q: 0,
+    r: 0,
+    s: 0,
+    t: 0,
+    u: 0,
+    v: 0,
+    w: 0,
+    x: 0,
+    y: 0,
+    z: 0,
+  }
+    let arrOfString1 = [];
+    let arrOfString2 = [];
+    let alphabetS1 = {};
+    let alphabetS2 = {};
+    for(let key in alphabet) {
+        alphabetS1[key] = alphabet[key];
+    };
+    for(let key in alphabet) {
+        alphabetS2[key] = alphabet[key];
+    };
+    s1.split('').map(item => {
+    if(alphabetS1.hasOwnProperty(item)) alphabetS1[item]++;
+  });
+    s2.split('').map(item => {
+    if(alphabetS2.hasOwnProperty(item)) alphabetS2[item]++;
+    });
+    for(let key in alphabetS1) {
+        if(alphabetS1[key] != 0) arrOfString1.push(`${alphabetS1[key]}:${key}`);
+    }
+    for(let key in alphabetS2) {
+        if(alphabetS2[key] != 0) arrOfString2.push(`${alphabetS2[key]}:${key}`)
+    }
+    arrOfString1.sort().sort((a, b) => +b[0] - (+a[0]));
+    arrOfString2.sort().sort((a, b) => +b[0] - (+a[0]));
+  
+    function stringFormer1(str) {
+        let array = ['1:'];
+        for(let i = 0; i < +str[0]; i++) {
+            array.push(str[2]);
+        }
+        return array.join('');
+    };
+  
+    function stringFormer2(str) {
+        let array = ['2:'];
+        for(let i = 0; i < +str[0]; i++) {
+            array.push(str[2]);
+        }
+        return array.join('');
+    }
+  
+    arrOfString1 = arrOfString1.map(stringFormer1);
+    arrOfString2 = arrOfString2.map(stringFormer2);
+
+    let resultArray = [];
+    let aos1 = (arrOfString1.length > arrOfString2.length ? arrOfString1 : arrOfString2);
+    let aos2 = (arrOfString1.length < arrOfString2.length ? arrOfString1 : arrOfString2);
+    let longerArrayLength = (aos1.length > aos2.length) ? aos1.length : aos2.length;
+    let shorterArrayLength = (aos1.length < aos2.length) ? aos1.length : aos2.length;
+
+  
+    outer: for(let i = 0; i < longerArrayLength; i++) {
+        for(let j = 0; j < shorterArrayLength ; j++) {
+            if(aos1[i].substring(1) == aos2[j].substring(1)) {
+                resultArray.push(aos2[j].substring(1));
+                continue outer;
+            } else if(aos1[i][2] == aos2[j][2]) {
+                resultArray.push(aos1[i].length > aos2[j].length ? aos1[i] : aos2[j]);
+                continue outer;
+            } else if(j == shorterArrayLength - 1 && aos1[i][2] != aos2[j][2] && !resultArray.includes(aos1[i])) resultArray.push(aos1[i]);
+        }
+    }
+  
+    outer2: for(let i = 0; i < shorterArrayLength; i++) {
+        for(let j = 0; j < resultArray.length; j++) {
+             if(aos2[i][2] == resultArray[j][2]) continue outer2;
+            }
+          resultArray.push(aos2[i]);
+        }
+    let ras = [];
+    for(let i = 0; i < resultArray.length; i++) {
+        if(resultArray[i].length == 3 && resultArray[i][0] != ':') continue;
+        if(resultArray[i].length >= 3) ras.push(resultArray[i]);
+    }
+    return ras.sort((a, b) => b.length - a.length).map(item => {
+      if(item[0] === ':') return item = '=' + item;
+      else return item;
+    }).sort((a, b) => {
+        if(a.length == b.length && a[0] == b[0] && a < b) return -1;
+        if(a.length == b.length && a[0] < b[0]) return -1;
+    }).join('/');
+}
