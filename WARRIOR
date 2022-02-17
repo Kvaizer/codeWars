@@ -1,0 +1,63 @@
+class Warrior {
+  constructor() {
+    this.lvl = 1,
+    this.Wran = 'Pushover',
+    this.experience1 = 100,
+    this.achievements1 = [],
+    this.ranks = ["Pushover", "Novice", "Fighter", "Warrior", "Veteran", "Sage", "Elite", "Conqueror", "Champion", "Master", "Greatest"];
+  }
+  level() {
+    return this.lvl;
+  }
+  rank() {
+    return this.Wran;
+  }
+  experience() {
+     return this.experience1;
+  }
+  achievements() {
+    return this.achievements1;
+  }
+  battle(enemy_lvl) {
+    let expression = '';
+    let enemyRank = this.ranks[Math.floor(enemy_lvl / 10)];
+    if(enemy_lvl > 100 || enemy_lvl < 1) {
+      return "Invalid level";
+    } else if(enemy_lvl - this.lvl >= 5 && this.ranks.indexOf(enemyRank) - this.ranks.indexOf(this.Wran) >= 1) {
+    console.log(this.ranks.indexOf(enemyRank) - this.ranks.indexOf(this.Wran))
+      return 'You\'ve been defeated';
+    } else if(enemy_lvl == this.lvl) {
+      this.experience1 += 10;
+      expression = 'A good fight';
+    } else if(this.lvl - enemy_lvl == 1) {
+      this.experience1 += 5
+      expression = 'A good fight';
+    } else if(this.lvl - enemy_lvl > 1) {
+      this.experience1 += 0;
+      expression = 'Easy fight';
+    } else if(this.lvl - enemy_lvl < 0) {
+      this.experience1 += 20 * ((enemy_lvl - this.lvl) ** 2);
+      expression = "An intense fight";
+    }
+    this.lvl = Math.floor(this.experience1 / 100);
+    if(this.experience1 >= 10e3) this.experience1 = 10e3;
+    if(this.lvl / 10 >= 1) this.Wran = this.ranks[Math.floor(this.lvl / 10)];
+    return expression;
+  }
+  training(array) {
+      let [description, expForTrain, minLvl] = array;
+      if(this.lvl < minLvl) {
+        return 'Not strong enough';
+     } else {
+        this.experience1 += expForTrain;
+        this.achievements1.push(description);
+        this.lvl = Math.floor(this.experience1 / 100);
+        if(this.lvl / 10 >= 1) this.Wran = this.ranks[Math.floor(this.lvl / 10)];
+        if(this.experience1 >= 10e3) this.experience1 = 10e3;
+        if(this.lvl >= 100) {
+          this.lvl = 100;
+          this.Wran = this.ranks[this.ranks.length - 1];
+        }
+        return description;
+    }
+  }
