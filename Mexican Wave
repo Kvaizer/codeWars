@@ -1,0 +1,14 @@
+function wave(str){
+  let strArray = str.split('');
+  let waveArray = [];
+  strArray.map((item, index, array) => {
+    if(item != ' ') {
+      item = item.toUpperCase();
+      array[index] = item;
+      waveArray.push(array.join(''));
+      item = item.toLowerCase();
+      array[index] = item;
+    }
+  })
+  return waveArray;
+}
