@@ -1,0 +1,14 @@
+function longestConsec(strarr, k) {
+    let values = [];
+    if(strarr.length < 1 || k > strarr.length || k < 1) return '';
+    else {
+      strarr.map((item, index, array) => {
+        for(let i = 0; i < (k - 1) && index + i + 1 < array.length ; i++) {
+          item += array[index + i + 1]
+        }
+        values.push(item);
+      })
+      let lengthes = values.map(item => item = item.length);
+      return values[lengthes.indexOf(Math.max(...lengthes))];
+}
+}
