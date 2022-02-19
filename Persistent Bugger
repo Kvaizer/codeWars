@@ -1,0 +1,12 @@
+function persistence(num) {
+    let arr = String(num).split('').map(item => item = +item);
+    let counter = 0;
+    while(arr.length > 1) {
+        num = arr.reduce((previousValue, item) => {
+        return previousValue * item;
+      }, 1);
+        arr = String(num).split('').map(item => item = +item);
+        counter++
+    }
+        return counter;
+}
