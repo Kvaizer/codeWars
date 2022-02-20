@@ -1,0 +1,79 @@
+function validSolution(board) {
+    let x;
+    let y;
+    let z;
+    let t = 0;
+    outer1: for(let i = 0; i < board.length; i++) {
+      board[i].find((current, index, array) => {
+      if(current == 0 || array.includes(current, index + 1)) {
+        x = false;
+        return;
+      }
+    });
+        if(x == false) break outer1;
+
+  }
+
+    outer2: for(let k = 0; k < board.length; k++) {
+        for(let i = 0; i < board[0].length; i++) {
+            for(let j = t + 1; j < board.length; j++) {
+            if(board[k][i] == board[j][i]){
+                y = false;
+                break outer2;
+              }
+//            console.log(`${board[k][i]} | ${board[j][i]}`);
+            }
+        }
+        t++;
+    }
+
+    let quads = [];
+    let p = 0;
+         outer3: for(let k = 0; k < 3; k++) {
+        let quad = [];
+
+        inner1: for(let i = 0; i <= board[0].length; i++) {
+                if(i == 3 || i == 6) {
+                  quads.push(quad);
+                  quad = [];
+                } else if (i == 9) {
+                  quads.push(quad);
+                  quad = [];
+                  p += 3;
+                  continue outer3;
+                }
+            for(let j = 0 + p; j < board.length; j++) {
+                if(j < 2) {
+                    quad.push(board[j][i]);
+                } else if(j == 2) {
+                    quad.push(board[j][i]);
+                    continue inner1;
+                } else if(j < 5) {
+                    quad.push(board[j][i]);
+                } else if (j == 5) {
+                    quad.push(board[j][i]);
+                    continue inner1;
+                } else if(j < 8) {
+                    quad.push(board[j][i]);
+                } else if(j == 8) {
+                    quad.push(board[j][i]);
+                    continue inner1;
+                } else break outer3;
+          }
+         }
+        }
+          outer4: for(let i = 0; i < board.length; i++) {
+      quads[i].find((current, index, array) => {
+      if(current == 0 || array.includes(current, index + 1)) {
+        z = false;
+        return;
+      }
+    });
+        if(z == false) break outer4;
+
+  }
+// console.log(x);
+// console.log(y);
+// console.log(z);
+    return (x == false || y == false || z == false) ? false : true;
+}
