@@ -1,0 +1,51 @@
+function sumStrings(a, b) {
+        const result = [];
+        let arrA = a.split('');
+        let arrB = b.split('');
+
+        for(let i = 0; i <= arrA.length; i++) {
+            if(arrA[i] == '0') {
+                arrA.shift();
+                i--;
+                console.log(`${i} x ${arrA[i]}`);
+            } else break;
+        }
+
+        for(let i = 0; i <= arrB.length; i++) {
+            if(arrB[i] == '0') {
+                arrB.shift();
+                i--;
+                console.log(`${i} x ${arrB[i]}`);
+            } else break;
+        }
+  
+        arrA = arrA.reverse();
+        arrB = arrB.reverse();
+
+        const longerLength = arrA.length > arrB.length ? arrA.length : arrB.length;
+        const longer = (longerLength == arrA.length) ? arrA : arrB;
+        const shorter = (longerLength == arrA.length) ? arrB : arrA;
+  
+        for(let i = 0; i <= longer.length; i++) {
+            result.push(0);
+        }
+
+        for(let i = 0; i < longer.length; i++) {
+            if(+longer[i] + +shorter[i] < 10) {
+                let y = +longer[i] + +shorter[i];
+                if(result[i] + y == 10) {
+                    result[i] -= 1;
+                    result[i + 1] = 1;
+                } else result[i] += y;
+            }
+            else if(longer[i] != undefined && shorter[i] != undefined) {
+                let x = (+longer[i] + +shorter[i]).toString();
+                result[i] += +x[1];
+                result[i + 1] += +x[0];
+            } else if(shorter[i] == undefined) result[i] += +longer[i];
+        }
+  
+        if(result[result.length - 1] == '0') result.pop();
+  
+        return result.reverse().join('');
+    }
