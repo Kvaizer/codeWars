@@ -1,0 +1,13 @@
+function expandedForm(num) {
+  let arr = num.toString().split('').map(item => item = +item);
+  let result = [];
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i] == 0 || i == arr.length - 1) continue;
+    else {
+      arr[i] *= Math.pow(10, arr.length - i - 1);
+      result.push(arr[i]);
+      }
+  }
+  if(arr[arr.length - 1] != 0) result.push(arr[arr.length - 1]);
+  return result.join(' + ');
+}
