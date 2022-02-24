@@ -1,0 +1,9 @@
+function findNb(m) {
+   let sum = 0;
+   let counter = 0;
+   for(let n = 1; sum < m; n++) {
+     sum += Math.pow(n, 3);
+     counter++;
+   }
+  return sum == m ? counter : -1;
+}
